@@ -40,9 +40,11 @@ while True:
         # inverting the mask
         mask = cv2.flip(mask, 1)
         # bitwise and operation to extract foreground / person
-       
-        # final image
-        res2 = cv2.bitwise_and(mountain, mountain, mask = mask)
+        mask = cv2.bitwise_not(mask) 
+        person = cv2.bitwise_and(frame, frame , mask = mask) 
+        final_image = np.where(person == 0 , mountain , person)
+        
+        
 
         # show it
         cv2.imshow('frame' , frame)
